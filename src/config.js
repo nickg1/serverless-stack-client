@@ -1,4 +1,6 @@
 export default {
+    MAX_ATTACHMENT_SIZE: 5000000,
+    STRIPE_KEY: "pk_test_51HZKA1FWU8ZxLkhjqB4U1CClyn5rw6nYFF3TtqnGciviSo0YkkTlnmaAiP4t4YJyL9va9hRCRvyKiy8SZ1XeYrQc000uTv9BXd",
     s3: {
       REGION: "us-east-1",
       BUCKET: "nick-gibson-notes-app-uploads"
