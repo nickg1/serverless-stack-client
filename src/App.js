@@ -8,6 +8,7 @@ import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 import  {  useEffect } from "react";
 import { onError } from "./libs/errorLib";
+import config from "./config";
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -16,8 +17,29 @@ function App() {
   useEffect(() => {
     onLoad();
   }, []);
+  const loadFacebookSDK = () => {
+    window.fbAsyncInit = function() {
+      window.FB.init({
+        appId: config.social.FB,
+        // autoLogAppEvents : true,
+        cookie: true,
+        xfbml: true,
+        version: 'v8.0'
+      });
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  }
   
   async function onLoad() {
+    loadFacebookSDK();
+
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);

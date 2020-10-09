@@ -20,6 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://nick-gibson-notes-app-client --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E3HN9JBJ1VFXD6 --paths /*",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
